@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos - OrçaCerto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .editable {
+            cursor: pointer;
+        }
+        .editable:hover {
+            background-color: #e9ecef;
+        }
+        .category-actions {
+            display: inline-block;
+        }
+        .category-actions button {
+            margin-left: 10px;
+        }
+        .category-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href="../index.html">OrçaCerto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="controle-gastos.html">Controle de Gastos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="planejamento-orcamento.html">Planejamento Orçamentário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="explicacao.html">Sobre o Aplicativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Controle de Gastos Section -->
+    <section class="container mt-5 pt-5">
+        <h2 class="text-center">Controle de Gastos</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="gasto-form">
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+                        <select class="form-control" id="categoria">
+                            <!-- As opções serão adicionadas dinamicamente -->
+                        </select>
+                        <button type="button" class="btn btn-info mt-2" onclick="addCategory()">Adicionar Categoria</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <input type="text" class="form-control" id="descricao" placeholder="Descreva o gasto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" class="form-control" id="valor" placeholder="R$" step="0.01" min="0" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Adicionar Gasto</button>
+                </form>
+            </div>
+        </div>
+        <!-- Lista de Categorias -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="text-center">Categorias</h3>
+                <ul class="list-group" id="categories-list">
+                    <!-- Categorias serão adicionadas dinamicamente -->
+                </ul>
+            </div>
+        </div>
+        <!-- Lista de Gastos -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="text-center">Gastos Recentes</h3>
+                <ul class="list-group" id="gastos-list">
+                    <!-- Gastos adicionados dinamicamente -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <span>&copy; 2024 OrçaCerto. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Lista de categorias padrão
+        var categories = ['Alimentação', 'Transporte', 'Educação', 'Saúde', 'Lazer'];
+
+        // Função para adicionar categorias ao select e à lista de categorias
+        function loadCategories() {
+            var select = document.getElementById('categoria');
+            var categoriesList = document.getElementById('categories-list');
+            select.innerHTML = '';
+            categoriesList.innerHTML = '';
+            categories.forEach(function(category) {
+                // Adicionar ao select
+                var option = document.createElement('option');
+                option.textContent = category;
+                option.value = category;
+                select.appendChild(option);
+
+                // Adicionar à lista de categorias
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item category-list-item';
+                listItem.innerHTML = `
+                    ${category}
+                    <div class="category-actions">
+                        <button class="btn btn-warning btn-sm" onclick="editCategory('${category}')">Editar</button>
+                        <button class="btn btn-danger btn-sm ml-2" onclick="removeCategory('${category}')">Excluir</button>
+                    </div>
+                `;
+                categoriesList.appendChild(listItem);
+            });
+        }
+
+        // Função para adicionar uma nova categoria
+        function addCategory() {
+            var newCategory = prompt('Digite o nome da nova categoria:');
+            if (newCategory && !categories.includes(newCategory)) {
+                categories.push(newCategory);
+                loadCategories();
+            }
+        }
+
+        // Função para remover uma categoria
+        function removeCategory(category) {
+            var index = categories.indexOf(category);
+            if (index !== -1) {
+                categories.splice(index, 1);
+                loadCategories();
+            }
+        }
+
+        // Função para editar uma categoria
+        function editCategory(oldCategory) {
+            var newCategory = prompt('Digite o novo nome da categoria:', oldCategory);
+            if (newCategory && newCategory !== oldCategory) {
+                var index = categories.indexOf(oldCategory);
+                if (index !== -1) {
+                    categories[index] = newCategory;
+                    loadCategories();
+                }
+            }
+        }
+
+        // Função para remover um gasto
+        function removeGasto(id) {
+            var listItem = document.querySelector(`li[data-id='${id}']`);
+            if (listItem) {
+                listItem.remove();
+            }
+        }
+
+        // Função para editar um gasto
+        function editGasto(id) {
+            var listItem = document.querySelector(`li[data-id='${id}']`);
+            var span = listItem.querySelector('.editable');
+            var newText = prompt('Edite o gasto:', span.textContent);
+            if (newText !== null) {
+                span.textContent = newText;
+            }
+        }
+
+        // Adicionando event listener para editar e excluir gastos
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('editable')) {
+                var id = event.target.closest('li').dataset.id;
+                editGasto(id);
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-danger')) {
+                var id = event.target.closest('li').dataset.id;
+                removeGasto(id);
+            }
+        });
+
+        // Adicionando novo gasto
+        document.getElementById('gasto-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var categoria = document.getElementById('categoria').value;
+            var descricao = document.getElementById('descricao').value;
+            var valor = document.getElementById('valor').value;
+            
+            var id = Date.now();
+            var newItem = document.createElement('li');
+            newItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            newItem.setAttribute('data-id', id);
+            newItem.innerHTML = `
+                <span class="editable">${categoria} - ${descricao}</span>
+                <span class="badge badge-primary badge-pill">R$ ${valor}</span>
+                <button class="btn btn-danger btn-sm ml-2" onclick="removeGasto(${id})">Excluir</button>
+            `;
+            document.getElementById('gastos-list').appendChild(newItem);
+            this.reset();
+        });
+
+        // Carregar categorias padrão ao iniciar
+        loadCategories();
+    </script>
+</body>
+</html>

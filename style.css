@@ -1,0 +1,152 @@
+body {
+    padding-top: 56px; /* Espaçamento para a navbar fixa */
+    background-color: #f4f4f4; /* Cor de fundo leve */
+    font-family: 'Arial', sans-serif; /* Fonte padrão */
+}
+
+.navbar {
+    margin-bottom: 30px; /* Espaçamento abaixo da navbar */
+}
+
+.banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/banner-financeiro.jpg') no-repeat center center/cover;
+    color: white; /* Cor do texto no banner */
+    padding: 100px 0; /* Espaçamento interno */
+    text-align: center; /* Alinhamento centralizado */
+}
+
+.banner h1 {
+    font-size: 3rem; /* Tamanho da fonte do título */
+    margin-bottom: 1rem; /* Espaçamento abaixo do título */
+}
+
+.banner p {
+    font-size: 1.5rem; /* Tamanho da fonte do parágrafo */
+    margin-bottom: 1.5rem; /* Espaçamento abaixo do parágrafo */
+}
+
+.banner button {
+    padding: 10px 30px; /* Espaçamento interno do botão */
+    font-size: 1.2rem; /* Tamanho da fonte do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    border: none; /* Remove a borda padrão */
+    background-color: #28a745; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+.banner button:hover {
+    background-color: #218838; /* Cor de fundo do botão ao passar o mouse */
+}
+
+.card {
+    margin-bottom: 20px; /* Espaçamento abaixo do card */
+    border: none; /* Remove a borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.card-header {
+    background-color: #6a0dad; /* Cor de fundo do cabeçalho do card */
+    color: white; /* Cor do texto do cabeçalho */
+    text-align: center; /* Alinhamento centralizado */
+}
+
+.footer {
+    background-color: #343a40; /* Cor de fundo do rodapé */
+    color: #fff; /* Cor do texto do rodapé */
+    padding: 20px; /* Espaçamento interno */
+    text-align: center; /* Alinhamento centralizado */
+}
+
+.text-success {
+    color: #28a745; /* Cor verde para textos de sucesso */
+}
+
+.text-danger {
+    color: #dc3545; /* Cor vermelha para textos de erro */
+}
+
+.features-section {
+    padding: 60px 0; /* Espaçamento interno */
+    text-align: center; /* Alinhamento centralizado */
+}
+
+.features-section h2 {
+    font-size: 2.5rem; /* Tamanho da fonte do título */
+    margin-bottom: 30px; /* Espaçamento abaixo do título */
+    color: #6a0dad; /* Cor do título */
+}
+
+.feature {
+    padding: 20px; /* Espaçamento interno */
+    transition: transform 0.3s ease; /* Transição suave para o efeito de hover */
+}
+
+.feature:hover {
+    transform: translateY(-10px); /* Efeito de elevação ao passar o mouse */
+}
+
+.feature i {
+    font-size: 3rem; /* Tamanho do ícone */
+    margin-bottom: 15px; /* Espaçamento abaixo do ícone */
+    color: #6a0dad; /* Cor do ícone */
+}
+
+.testimonials {
+    background-color: #f8f8f8; /* Cor de fundo */
+    padding: 60px 0; /* Espaçamento interno */
+    text-align: center; /* Alinhamento centralizado */
+}
+
+.testimonials h2 {
+    font-size: 2.5rem; /* Tamanho da fonte do título */
+    margin-bottom: 30px; /* Espaçamento abaixo do título */
+    color: #6a0dad; /* Cor do título */
+}
+
+.testimonial {
+    background-color: white; /* Cor de fundo do depoimento */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px; /* Espaçamento abaixo do depoimento */
+}
+
+.testimonial img {
+    width: 80px; /* Largura da imagem */
+    height: 80px; /* Altura da imagem */
+    border-radius: 50%; /* Imagem circular */
+    margin-bottom: 15px; /* Espaçamento abaixo da imagem */
+}
+
+.testimonial p {
+    font-size: 1.1rem; /* Tamanho da fonte do parágrafo */
+    margin-bottom: 15px; /* Espaçamento abaixo do parágrafo */
+}
+
+@media (max-width: 768px) {
+    .card-header,
+    .card-body,
+    .news-card {
+        text-align: center; /* Alinhamento centralizado em dispositivos móveis */
+    }
+
+    .banner {
+        padding: 60px 0; /* Ajuste no espaçamento interno do banner */
+    }
+
+    .banner h1 {
+        font-size: 2.5rem; /* Tamanho da fonte do título em dispositivos móveis */
+    }
+
+    .banner p {
+        font-size: 1.2rem; /* Tamanho da fonte do parágrafo em dispositivos móveis */
+    }
+
+    .features-section h2,
+    .testimonials h2 {
+        font-size: 2rem; /* Tamanho da fonte dos títulos em dispositivos móveis */
+    }
+}
