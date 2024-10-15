@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginn - Transformando conhecimento em prosperidade financeira</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #CD853F; /* Dourado */
+            --primary-dark: #1C1C1C; /* Preto */
+            --card-bg: #F8F8FF; /* Branco */
+            --footer-bg: #1C1C1C; /* Preto */
+            --footer-text: #ffffff;
+            --font-family: 'Montserrat', sans-serif;
+            --light-color: #F8F8FF; /* Branco */
+            --dark-color: #1C1C1C; /* Preto */
+            --highlight-color: #ff4081;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: var(--font-family);
+            padding-top: 56px;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .navbar .navbar-brand img {
+            height: 40px; /* Tamanho ajustado do logotipo */
+            margin-right: 10px;
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            color: #fff;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--highlight-color);
+        }
+
+        .banner {
+            background: url('https://media.licdn.com/dms/image/v2/D4D12AQGxXzYp_kEfbQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1679069738534?e=2147483647&v=beta&t=btYqJ6VQQWMl0gf8g8PFiwfrUdIlb0iBpzhfXvQ6GME') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner p {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner button {
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px var(--shadow-color);
+            background-color: var(--card-bg);
+        }
+
+        .card-header {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--footer-text);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: var(--footer-text);
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--highlight-color);
+        }
+
+        .features-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+
+        .feature {
+            padding: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .feature h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .tips-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .tips-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+
+        .tip {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px var(--shadow-color);
+            margin-bottom: 20px;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                padding: 60px 0;
+            }
+
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .banner p {
+                font-size: 1.2rem;
+            }
+
+            .features-section h2,
+            .tips-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="https://i.postimg.cc/9fz0866b/Whats-App-Image-2024-10-15-at-09-59-44.jpg" alt="Logo Beginn"> Beginn
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/controle-gastos.html">Controle de Gastos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/planejamento-orcamento.html">Planejamento Orçamentário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/noticias.html">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/explicacao.html">Sobre o Aplicativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/cadastro.html">Cadastro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <h1>Gerencie suas finanças com eficiência</h1>
+        <p>Descubra como pequenas mudanças podem fazer uma grande diferença.</p>
+        <button onclick="window.location.href='pages/cadastro.html'">Cadastre-se Agora</button>
+        <button onclick="window.location.href='pages/login.html'" style="margin-left: 10px;">Login</button>
+
+        <!-- Botões de compartilhamento -->
+        <div class="share-buttons">
+            <button onclick="shareContent('facebook')"><i class="fab fa-facebook-f"></i> Facebook</button>
+            <button onclick="shareContent('twitter')"><i class="fab fa-twitter"></i> Twitter</button>
+            <button onclick="shareContent('linkedin')"><i class="fab fa-linkedin-in"></i> LinkedIn</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Nossas Funcionalidades</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature">
+                        <i class="fas fa-wallet"></i>
+                        <h3>Controle de Gastos</h3>
+                        <p>Acompanhe suas despesas diárias de forma eficiente e prática.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>Planejamento Financeiro</h3>
+                        <p>Crie metas e organize seu orçamento para atingir seus objetivos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Investimentos</h3>
+                        <p>Veja como seus investimentos podem crescer ao longo do tempo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Beginn. Todos os direitos reservados.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function shareContent(platform) {
+            var shareUrl = window.location.href;
+            if (platform === 'facebook') {
+                window.open('https://www.facebook.com/sharer/sharer.php?u=' + shareUrl, '_blank');
+            } else if (platform === 'twitter') {
+                window.open('https://twitter.com/intent/tweet?url=' + shareUrl, '_blank');
+            } else if (platform === 'linkedin') {
+                window.open('https://www.linkedin.com/shareArticle?url=' + shareUrl, '_blank');
+            }
+        }
+    </script>
+</body>
+
+</html>

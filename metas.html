@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrçaCerto - Metas</title>
+  <!-- Link para o Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Link para o Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Link para o seu CSS personalizado -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Corrija o caminho para o seu CSS -->
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+      background-color: #6a0dad;
+      border-color: #6a0dad;
+    }
+    .btn-primary:hover {
+      background-color: #4b0082;
+      border-color: #4b0082;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Formulário para adicionar metas -->
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Adicionar Meta</h1>
+    <form id="metaForm">
+      <div class="form-group">
+        <label for="meta">Meta:</label>
+        <input type="text" id="meta" class="form-control" placeholder="Descreva sua meta" required>
+      </div>
+      <div class="form-group">
+        <label for="prazo">Prazo:</label>
+        <input type="date" id="prazo" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="valor-meta">Valor (R$):</label>
+        <input type="number" id="valor-meta" class="form-control" placeholder="Ex: 1000" min="0" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Adicionar Meta</button>
+    </form>
+
+    <ul id="metaList" class="list-group mt-3">
+      <!-- As metas serão inseridas aqui -->
+    </ul>
+  </div>
+
+  <!-- Referência ao arquivo main.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script> <!-- Corrija o caminho para o seu JS -->
+</body>
+</html>

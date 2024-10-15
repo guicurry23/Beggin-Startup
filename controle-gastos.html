@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos - Beggin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #CD853F; /* Dourado */
+            --primary-dark: #A65E2E; /* Tom mais escuro do dourado */
+            --card-bg: #F8F8FF; /* Branco */
+            --footer-bg: #1C1C1C; /* Preto */
+            --footer-text: #F8F8FF; /* Texto do footer em branco */
+            --font-family: 'Roboto', sans-serif;
+            --light-color: #000000; /* Texto geral em preto */
+            --dark-color: #121212; /* Fundo geral */
+            --highlight-color: #272727; /* Cor de destaque */
+            --shadow-color: rgba(12, 12, 12, 0.3); /* Cor da sombra */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--primary-color), #004d40);
+            color: var(--dark-color);
+            margin: 0;
+            padding-top: 56px; /* Espaço para a navbar fixa */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fundo 3D com cifrões */
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.1) 25%,
+                rgba(255, 255, 255, 0) 25%,
+                rgba(255, 255, 255, 0) 50%
+            );
+            z-index: -1;
+            pointer-events: none;
+            background-color: rgba(205, 133, 63, 0.5);
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            border-radius: 25px; /* Bordas arredondadas */
+            transition: all 0.3s ease; /* Transições suaves */
+        }
+
+        .btn-primary, .btn-info {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover, .btn-info:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra ao passar o mouse */
+        }
+
+        .btn-transparent {
+            background-color: transparent;
+            border: 1px solid var(--dark-color);
+            color: var(--dark-color);
+        }
+
+        .btn-transparent:hover {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra ao passar o mouse */
+        }
+
+        .list-group-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            margin-bottom: 10px;
+            color: var(--light-color); /* Cor do texto das categorias em branco */
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        .form-control {
+            border: 1px solid var(--primary-color);
+            border-radius: 0.25rem;
+            transition: border-color 0.3s ease; /* Transição para o foco */
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 0.2rem rgba(205, 133, 63, 0.25);
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--light-color); /* Cor do texto das labels em branco */
+        }
+
+        .form-group .btn-info {
+            margin-top: 10px;
+        }
+
+        .btn-remove {
+            background-color: var(--highlight-color);
+            border-color: var(--highlight-color);
+            color: var(--light-color);
+        }
+
+        .btn-remove:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra ao passar o mouse */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-pattern"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="../index.html">Beggin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="controle-gastos.html">Controle de Gastos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="planejamento-orcamento.html">Planejamento Orçamentário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="explicacao.html">Sobre o Aplicativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Controle de Gastos Section -->
+    <section class="container mt-5 pt-5">
+        <h2 class="text-center mb-4 text-light">Controle de Gastos</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="gasto-form">
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+                        <select class="form-control" id="categoria">
+                            <!-- As opções serão adicionadas dinamicamente -->
+                        </select>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-info" onclick="addCategory()">
+                                <i class="fas fa-plus"></i> Adicionar Categoria
+                            </button>
+                            <button type="button" class="btn btn-transparent ml-2" onclick="toggleCategories()">
+                                <i class="fas fa-eye"></i> Mostrar/Ocultar Categorias
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <input type="text" class="form-control" id="descricao" placeholder="Descreva o gasto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" class="form-control" id="valor" placeholder="R$" step="0.01" min="0" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-plus-circle"></i> Adicionar Gasto
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de Categorias -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="text-center mb-4 text-light">Categorias</h3>
+                <ul class="list-group" id="categories-list">
+                    <!-- As categorias serão adicionadas dinamicamente -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lista de Gastos -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="text-center mb-4 text-light">Gastos</h3>
+                <ul class="list-group" id="gastos-list">
+                    <!-- Os gastos serão adicionados dinamicamente -->
+                </ul>
+                <div class="text-right mt-3">
+                    <strong>Total: R$ <span id="total-gastos">0.00</span></strong>
+                    <button class="btn btn-danger btn-sm ml-2" onclick="removeAllGastos()">
+                        <i class="fas fa-trash-alt"></i> Apagar Todos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="container">
+            <span>&copy; 2024 Beggin. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var categories = ['Alimentação', 'Transporte', 'Educação', 'Saúde', 'Lazer'];
+        var gastos = [];
+
+        function loadCategories() {
+            var categoriesList = document.getElementById('categories-list');
+            var select = document.getElementById('categoria');
+            categoriesList.innerHTML = ''; 
+            select.innerHTML = ''; 
+            categories.forEach(function(category) {
+                var option = document.createElement('option');
+                option.textContent = category;
+                option.value = category;
+                select.appendChild(option);
+
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.innerHTML = `
+                    <span>${category}</span>
+                    <div>
+                        <button class="btn btn-remove btn-sm mr-2" onclick="editCategory('${category}')"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-remove btn-sm" onclick="removeCategory('${category}')">x</button>
+                    </div>
+                `;
+                categoriesList.appendChild(listItem);
+            });
+        }
+
+        function addCategory() {
+            var newCategory = prompt('Digite o nome da nova categoria:');
+            if (newCategory && !categories.includes(newCategory)) {
+                categories.push(newCategory);
+                loadCategories();
+            } else if (categories.includes(newCategory)) {
+                alert('Categoria já existente.');
+            }
+        }
+
+        function removeCategory(category) {
+            if (confirm(`Você tem certeza que deseja remover a categoria "${category}"?`)) {
+                categories = categories.filter(c => c !== category);
+                loadCategories();
+            }
+        }
+
+        function editCategory(category) {
+            var newCategory = prompt('Digite o novo nome para a categoria:', category);
+            if (newCategory && !categories.includes(newCategory)) {
+                var index = categories.indexOf(category);
+                if (index > -1) {
+                    categories[index] = newCategory;
+                    loadCategories();
+                }
+            } else if (categories.includes(newCategory)) {
+                alert('Categoria já existente.');
+            }
+        }
+
+        function toggleCategories() {
+            var categoriesList = document.getElementById('categories-list');
+            categoriesList.classList.toggle('d-none');
+        }
+
+        document.getElementById('gasto-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var categoria = document.getElementById('categoria').value;
+            var descricao = document.getElementById('descricao').value;
+            var valor = parseFloat(document.getElementById('valor').value);
+
+            if (categoria && descricao && !isNaN(valor)) {
+                gastos.push({ categoria, descricao, valor });
+                updateGastosList();
+                updateTotalGastos();
+
+                document.getElementById('descricao').value = '';
+                document.getElementById('valor').value = '';
+            } else {
+                alert('Por favor, preencha todos os campos corretamente.');
+            }
+        });
+
+        function updateGastosList() {
+            var gastosList = document.getElementById('gastos-list');
+            gastosList.innerHTML = '';
+
+            gastos.forEach(function(gasto, index) {
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.innerHTML = `
+                    <strong>${gasto.categoria}</strong> - ${gasto.descricao}: R$ ${gasto.valor.toFixed(2)}
+                    <button class="btn btn-remove btn-sm float-right" onclick="removeGasto(${index})"><i class="fas fa-trash"></i></button>
+                `;
+                gastosList.appendChild(listItem);
+            });
+        }
+
+        function updateTotalGastos() {
+            var total = gastos.reduce(function(sum, gasto) {
+                return sum + gasto.valor;
+            }, 0);
+            document.getElementById('total-gastos').textContent = total.toFixed(2);
+        }
+
+        function removeGasto(index) {
+            gastos.splice(index, 1);
+            updateGastosList();
+            updateTotalGastos();
+        }
+
+        function removeAllGastos() {
+            if (confirm('Você tem certeza que deseja apagar todos os gastos?')) {
+                gastos = [];
+                updateGastosList();
+                updateTotalGastos();
+            }
+        }
+
+        loadCategories();
+    </script>
+</body>
+
+</html>

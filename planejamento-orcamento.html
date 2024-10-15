@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento Orçamentário - Beggin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #CD853F; /* Dourado */
+            --primary-dark: #1C1C1C; /* Preto */
+            --card-bg: #F8F8FF; /* Branco */
+            --footer-bg: #1C1C1C; /* Preto */
+            --footer-text: #ffffff; /* Texto do footer */
+            --font-family: 'Montserrat', sans-serif;
+            --light-color: #F8F8FF; /* Texto geral em branco */
+            --dark-color: #1C1C1C; /* Fundo geral */
+            --highlight-color: #ff4081; /* Cor de destaque */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Cor da sombra */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            margin: 0;
+            padding-top: 56px; /* Espaço para a navbar fixa */
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .btn-primary, .btn-dark, .btn-info {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover, .btn-dark:hover, .btn-info:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            color: var(--dark-color);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--dark-color); /* Cor das labels */
+        }
+
+        .investment-form input, .investment-form select {
+            margin-bottom: 15px;
+        }
+
+        .investment-form .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .investment-form .form-group label {
+            flex: 1;
+        }
+
+        .investment-form .form-group input, .investment-form .form-group select {
+            flex: 2;
+        }
+
+        .card-result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+        }
+
+        .result-header {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-color); /* Cor do cabeçalho do resultado */
+        }
+
+        .tooltip-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            color: var(--dark-color); /* Cor dos ícones de tooltip */
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--footer-text);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="../index.html">Beggin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="controle-gastos.html">Controle de Gastos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="planejamento-orcamento.html">Planejamento Orçamentário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="explicacao.html">Sobre o Aplicativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Planejamento Orçamentário Section -->
+    <section class="container mt-5 pt-5">
+        <h2 class="text-center mb-4">Planejamento Orçamentário</h2>
+
+        <!-- Calculadora de Metas -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Calculador de Investimento</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="calculatorForm" class="investment-form">
+                            <div class="form-group">
+                                <label for="initialInvestment">Investimento Inicial <span class="tooltip-icon" data-toggle="tooltip" title="Valor aplicado inicialmente">ℹ️</span></label>
+                                <input type="number" class="form-control" id="initialInvestment" placeholder="R$" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="monthlyInvestment">Aportes Mensais <span class="tooltip-icon" data-toggle="tooltip" title="Valor aplicado mensalmente">ℹ️</span></label>
+                                <input type="number" class="form-control" id="monthlyInvestment" placeholder="R$" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="investmentPeriod">Período da Aplicação (em meses) <span class="tooltip-icon" data-toggle="tooltip" title="Duração total do investimento">ℹ️</span></label>
+                                <input type="number" class="form-control" id="investmentPeriod" placeholder="Meses" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="investmentType">Escolha o Investimento <span class="tooltip-icon" data-toggle="tooltip" title="Selecione o tipo de investimento desejado">ℹ️</span></label>
+                                <select class="form-control" id="investmentType" required>
+                                    <option value="cdb">CDB</option>
+                                    <option value="tesouro">Tesouro Direto</option>
+                                    <option value="selic">SELIC</option>
+                                    <option value="cdi">CDI</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inflationRate">Taxa de Inflação Anual (%) <span class="tooltip-icon" data-toggle="tooltip" title="Taxa de inflação esperada para o período">ℹ️</span></label>
+                                <input type="number" class="form-control" id="inflationRate" placeholder="%" value="4.0" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Calcular</button>
+                        </form>
+                        <div id="calculatorResult" class="card-result mt-3" style="display: none;">
+                            <!-- Resultado da Calculadora -->
+                            <div class="result-header">Resultado do Investimento:</div>
+                            <div id="resultValue"></div>
+                            <canvas id="investmentChart" class="mt-3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <span>&copy; 2024 Beggin. Todos os direitos reservados. | <a href="../index.html">Início</a> | <a href="controle-gastos.html">Controle de Gastos</a> | <a href="planejamento-orcamento.html">Planejamento Orçamentário</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Inicializar tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // Manipular o envio do formulário
+        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+            const investmentPeriod = parseFloat(document.getElementById('investmentPeriod').value);
+            const investmentType = document.getElementById('investmentType').value;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+
+            let rate;
+            switch (investmentType) {
+                case 'cdb':
+                    rate = 0.07;
+                    break;
+                case 'tesouro':
+                    rate = 0.08;
+                    break;
+                case 'selic':
+                    rate = 0.09;
+                    break;
+                case 'cdi':
+                    rate = 0.06;
+                    break;
+                default:
+                    rate = 0;
+            }
+
+            // Cálculo do valor futuro considerando a inflação
+            let futureValue = initialInvestment * Math.pow(1 + rate, investmentPeriod / 12);
+            for (let i = 0; i < investmentPeriod; i++) {
+                futureValue += monthlyInvestment * Math.pow(1 + rate, (investmentPeriod - i) / 12);
+            }
+            // Ajustar pela inflação
+            futureValue /= Math.pow(1 + inflationRate, investmentPeriod / 12);
+
+            // Exibir resultado
+            document.getElementById('resultValue').innerText = `R$ ${futureValue.toFixed(2)}`;
+            document.getElementById('calculatorResult').style.display = 'block';
+
+            // Exibir gráfico
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            const labels = Array.from({length: investmentPeriod}, (_, i) => i + 1);
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Valor do Investimento',
+                    data: labels.map((month) => initialInvestment * Math.pow(1 + rate, month / 12) + monthlyInvestment * (Math.pow(1 + rate, month / 12) - 1) / (rate / 12)),
+                    backgroundColor: 'rgba(205, 133, 63, 0.2)',
+                    borderColor: 'rgba(205, 133, 63, 1)',
+                    borderWidth: 1
+                }]
+            };
+            new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Meses'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valor (R$)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

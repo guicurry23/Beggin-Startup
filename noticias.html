@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias - Beggin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #CD853F; /* Dourado */
+            --card-bg: #F8F8FF; /* Branco */
+            --footer-bg: #1C1C1C; /* Preto */
+            --footer-text: #F8F8FF; /* Branco */
+            --font-family: 'Roboto', sans-serif;
+            --dark-color: #000000; /* Texto geral em preto */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Cor da sombra */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--footer-bg);
+            color: var(--dark-color);
+            margin: 0;
+            padding-top: 56px; /* Espaço para a navbar fixa */
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #a86f38; /* Tom mais escuro do dourado */
+            border-color: #a86f38; /* Tom mais escuro do dourado */
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            color: var(--dark-color); /* Texto dos cartões em preto */
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--footer-text);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .section-title {
+            color: #F8F8FF; /* Título em branco */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="../index.html">Beggin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="controle-gastos.html">Controle de Gastos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="planejamento-orcamento.html">Planejamento Orçamentário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="noticias.html">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="explicacao.html">Sobre o Aplicativo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Notícias Section -->
+    <section class="container mt-5 pt-5">
+        <h2 class="text-center mb-4 section-title">Últimas Notícias sobre Economia</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="https://veja.abril.com.br/wp-content/uploads/2021/02/GettyImages-1229674447.jpg.jpg?quality=90&strip=info&w=1280&h=720&crop=1" class="card-img-top" alt="Notícia 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Bolsa de Valores em Alta</h5>
+                        <p class="card-text">A Bolsa de Valores brasileira subiu 2% após novas políticas econômicas serem anunciadas pelo governo.</p>
+                        <a href="https://economia.uol.com.br/noticias/redacao/2024/08/23/bolsa-e-dolar.htm" class="btn btn-primary" target="_blank">Leia mais</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrEKZ8vBIE6pnBAjvAoJjcVwS1JJtNrRtpWg&s" class="card-img-top" alt="Notícia 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Dólar Cai Ante a Economia</h5>
+                        <p class="card-text">O dólar caiu 1,5% frente ao real, impulsionado pela melhora das expectativas econômicas no cenário internacional.</p>
+                        <a href="https://economia.uol.com.br/noticias/redacao/2024/08/23/bolsa-e-dolar.htm" class="btn btn-primary" target="_blank">Leia mais</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="https://neofeed.com.br/wp-content/uploads/2023/09/inflacao-global.jpg" class="card-img-top" alt="Notícia 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Inflação Abaixo do Esperado</h5>
+                        <p class="card-text">A inflação no país caiu para 3,2% ao ano, o que representa uma surpresa positiva para analistas econômicos.</p>
+                        <a href="https://economia.uol.com.br/noticias/redacao/2024/08/23/bolsa-e-dolar.htm" class="btn btn-primary" target="_blank">Leia mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <span>&copy; 2024 Beggin. Todos os direitos reservados. | <a href="../index.html">Início</a> | <a href="controle-gastos.html">Controle de Gastos</a> | <a href="planejamento-orcamento.html">Planejamento Orçamentário</a> | <a href="noticias.html">Notícias</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

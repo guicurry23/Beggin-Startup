@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal - Beggin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #343a40;
+            padding-top: 56px;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background-color: #CD853F;
+        }
+        .container {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #CD853F;
+            font-weight: 600;
+        }
+        .profile-photo, .cover-photo {
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .profile-photo:hover, .cover-photo:hover {
+            transform: scale(1.05);
+        }
+        .cover-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #CD853F;
+        }
+        .form-control {
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            background-color: #CD853F;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-custom:hover {
+            background-color: #A65E2E;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            border-radius: 5px;
+        }
+        #message {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Responsividade */
+        @media (max-width: 576px) {
+            .profile-photo {
+                width: 80px;
+                height: 80px;
+            }
+            .cover-photo {
+                height: 150px;
+            }
+            .form-control {
+                font-size: 14px;
+            }
+        }
+        @media (min-width: 576px) {
+            .form-upload {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .form-upload label {
+                margin-right: 10px;
+            }
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+
+        const firebaseConfig = {
+            // Suas credenciais do Firebase
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-info').textContent = `Bem-vindo, ${user.displayName || user.email}!`;
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="https://i.postimg.cc/9fz0866b/Whats-App-Image-2024-10-15-at-09-59-44.jpg" alt="Logo Beginn" height="40" class="mr-2">
+            Beginn
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 id="user-info"></h1>
+
+        <h2>Configurações de Perfil</h2>
+        <div class="form-upload">
+            <label for="cover-upload">Carregar Imagem de Capa:</label>
+            <input type="file" class="form-control" id="cover-upload" accept="image/*">
+        </div>
+        <div class="form-upload">
+            <label for="photo-upload">Carregar Foto de Perfil:</label>
+            <input type="file" class="form-control" id="photo-upload" accept="image/*">
+        </div>
+        <img id="cover-photo" alt="Imagem de Capa" class="cover-photo" />
+        <img id="user-photo" alt="Foto do Usuário" class="profile-photo" />
+
+        <form id="profile-form">
+            <div class="form-group">
+                <label for="bio">Biografia</label>
+                <textarea class="form-control" id="bio" rows="3" placeholder="Uma breve descrição sobre você..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" class="form-control" id="website" placeholder="Seu site pessoal">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gênero</label>
+                <select class="form-control" id="gender">
+                    <option value="">Selecione...</option>
+                    <option value="male">Masculino</option>
+                    <option value="female">Feminino</option>
+                    <option value="other">Outro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" placeholder="Seu status atual">
+            </div>
+            <div class="form-group">
+                <h3>Redes Sociais</h3>
+                <input type="url" class="form-control" id="instagram" placeholder="Instagram">
+                <input type="url" class="form-control" id="twitter" placeholder="Twitter">
+                <input type="url" class="form-control" id="linkedin" placeholder="LinkedIn">
+            </div>
+            <button type="submit" class="btn btn-custom">Salvar Alterações</button>
+            <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancelar</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+    </div>
+
+    <script>
+        const auth = getAuth();
+        document.getElementById('logout').addEventListener('click', function() {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+
+        document.getElementById('cover-upload').addEventListener('change', function(event) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('cover-photo').src = e.target.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        document.getElementById('photo-upload').addEventListener('change', function(event) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('user-photo').src = e.target.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const bio = document.getElementById('bio').value.trim();
+            const website = document.getElementById('website').value.trim();
+            const gender = document.getElementById('gender').value;
+            const status = document.getElementById('status').value.trim();
+            const instagram = document.getElementById('instagram').value.trim();
+            const twitter = document.getElementById('twitter').value.trim();
+            const linkedin = document.getElementById('linkedin').value.trim();
+
+            // Salvar dados no console (substitua por lógica de armazenamento)
+            console.log({ bio, website, gender, status, instagram, twitter, linkedin });
+
+            document.getElementById('message').textContent = 'Alterações salvas com sucesso!';
+            document.getElementById('message').style.color = 'green';
+        });
+
+        function cancelEdit() {
+            document.getElementById('profile-form').reset();
+            document.getElementById('message').textContent = '';
+        }
+    </script>
+</body>
+</html>
